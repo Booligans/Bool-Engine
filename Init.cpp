@@ -1,6 +1,5 @@
 #include "Init.h"
-
-
+//HOLA
 //Crea una pantalla. | PARAMETROS: Puntero de la pantalla, alto, ancho, posicionx donde aparece, posiciony donde aparece, titulo y el tipo de pantalla (0 = standard).
 bool create_display(ALLEGRO_DISPLAY * &display, int const& screenHeight, int const& screenWidth, int const& screen_x_position, int const& screen_y_position, std::string screenName, int const& screenType) {
 	bool create = true;
