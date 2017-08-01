@@ -13,7 +13,7 @@
 *  This is the sound library. Everything related with the audio 
 *  will be programmed here. 
 *
-*  Keep in mind the diference between sound and song, being the
+*  Keep in mind the difference between sound and song, being the
 *  first one considered as a soundEffect that might be played when
 *  certain circumstances occurs and a song to be the music played
 *  in the background of the game.
