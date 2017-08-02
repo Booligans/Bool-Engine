@@ -63,6 +63,7 @@ void drawSprite(ALLEGRO_BITMAP *image, float posx, float posy, ALLEGRO_COLOR tin
 
 void showScreen() {
 	al_flip_display();
+	al_clear_to_color(al_map_rgb(0, 0, 0));
 }
 
 void destroySprite(ALLEGRO_BITMAP * &image) {
