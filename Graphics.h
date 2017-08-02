@@ -45,7 +45,7 @@ void drawSprite(ALLEGRO_BITMAP *image, float posx, float posy, float centerx, fl
 void drawSprite(ALLEGRO_BITMAP *image, float posx, float posy, ALLEGRO_COLOR tint, float centerx, float centery, float angle, float swidth, float sheight);
 
 //IMPORTANT FUNCIONS FOR A SPRITE.
-//Shows in the displays the backbuffer (everything drawed).
+//Clears the screen and then shows in the displays the backbuffer (everything drawed).
 void showScreen();
 //Destroys the sprite, freeing al the memmory and resources used by it, also lets the pointer to nullptr. PARAMETERS: Sprite.
 void destroySprite(ALLEGRO_BITMAP * &image);
