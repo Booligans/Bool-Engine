@@ -8,19 +8,78 @@
 #include <string>
 
 //EVENTS
-//Registers events needed | PARAMETERS: Screen, Timer, Event queue and a sort of booleans indicating which kind of events the game uses. 
-void initializeEvents(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER * &timer, ALLEGRO_EVENT_QUEUE * &event_queue, bool use_timer, bool use_display, bool use_keyboard, bool use_mouse);
+//Types of events
+enum eventType
+{
+	EVENT_JOYSTICK_AXIS = 1,
+	EVENT_JOYSTICK_BUTTON_DOWN = 2,
+	EVENT_JOYSTICK_BUTTON_UP = 3,
+	EVENT_JOYSTICK_CONFIGURATION = 4,
+
+	EVENT_KEY_DOWN = 10, //Key pressed
+	EVENT_KEY_CHAR = 11,
+	EVENT_KEY_UP = 12, //Key unpressed
+
+	EVENT_MOUSE_AXES = 20,
+	EVENT_MOUSE_BUTTON_DOWN = 21,
+	EVENT_MOUSE_BUTTON_UP = 22,
+	EVENT_MOUSE_ENTER_DISPLAY = 23,
+	EVENT_MOUSE_LEAVE_DISPLAY = 24,
+	EVENT_MOUSE_WARPED = 25,
+
+	EVENT_TIMER = 30, //Event of a timer.
+
+	EVENT_DISPLAY_EXPOSE = 40,
+	EVENT_DISPLAY_RESIZE = 41,
+	EVENT_DISPLAY_CLOSE = 42, //Event clicking on the closing button of the display.
+	EVENT_DISPLAY_LOST = 43,
+	EVENT_DISPLAY_FOUND = 44,
+	EVENT_DISPLAY_SWITCH_IN = 45,
+	EVENT_DISPLAY_SWITCH_OUT = 46,
+	EVENT_DISPLAY_ORIENTATION = 47,
+	EVENT_DISPLAY_HALT_DRAWING = 48,
+	EVENT_DISPLAY_RESUME_DRAWING = 49,
+
+	EVENT_TOUCH_BEGIN = 50,
+	EVENT_TOUCH_END = 51,
+	EVENT_TOUCH_MOVE = 52,
+	EVENT_TOUCH_CANCEL = 53,
+
+	EVENT_DISPLAY_CONNECTED = 60,
+	EVENT_DISPLAY_DISCONNECTED = 61
+};
+//Creates an event queue and registers some types of events. | PARAMETERS: Screen, Timer, Event queue and a sort of booleans indicating which kind of events the game uses. 
+void initializeEvent(ALLEGRO_DISPLAY *display, ALLEGRO_EVENT_QUEUE * &event_queue, bool use_display, bool use_keyboard, bool use_mouse);
+//Waits until an event happens | PARAMETERS: Event queue, Event.
+void waitEvent(ALLEGRO_EVENT_QUEUE * &event_queue, ALLEGRO_EVENT &events);
+//Destroys event queue | PARAMETERS: Event queue.
+void destroyEvent(ALLEGRO_EVENT_QUEUE * &event_queue);
+
 //DISPLAY
 //Types of screens
 enum ScreenType { standard, fullscreen, fullscreen_window, resizable, noframe };
 //Creates a display. | PARAMETERS: display pointer, height, width, positionX where it appears, positionY where it appears, ScreenTitle and the type of screen (see ScreenType enum for different types).
-bool createDisplay(ALLEGRO_DISPLAY * &display, int const& screenHeight, int const& screenWidth, int const& screen_x_position, int const& screen_y_position, std::string screenName, ScreenType const& screenType);
+void createDisplay(ALLEGRO_DISPLAY * &display, int const& screenHeight, int const& screenWidth, int const& screen_x_position, int const& screen_y_position, std::string screenName, ScreenType const& screenType);
+//Destroys a display. | PARAMETERS: display pointer.
+void destroyDisplay(ALLEGRO_DISPLAY * &display);
+
 //TIMER
+//Creates a timer with a speed of 1/FPS. A timer will generate an event each 1/FPS. | PARAMETERS: Timer pointer, FPS.
+void createTimer(ALLEGRO_TIMER * &timer, const double FPS);
+//Registers a specific timer to the event queue. | PARAMETERS: Event queue, timer.
+void registerTimer(ALLEGRO_EVENT_QUEUE * &event_queue, ALLEGRO_TIMER *timer);
+//Starts a timer so that it begins to generate events. | PARAMETERS: Timer pointer.
+void startTimer(ALLEGRO_TIMER *timer);
+//Stops a timer so that it stops generating events. | PARAMETERS: Timer pointer.
+void stopTimer(ALLEGRO_TIMER *timer);
+//Destroys a timer freeing the memmory and resources. | PARAMETERS: Timer pointer.
+void destroyTimer(ALLEGRO_TIMER * &timer);
 
 //KEYBOARD
 //Keyboard codes
 enum keycodes
 {
+	//Keyboard letters
 	KEY_A = 1,
 	KEY_B = 2,
 	KEY_C = 3,
@@ -47,7 +106,7 @@ enum keycodes
 	KEY_X = 24,
 	KEY_Y = 25,
 	KEY_Z = 26,
-
+	//Keyboard numbers
 	KEY_0 = 27,
 	KEY_1 = 28,
 	KEY_2 = 29,
@@ -58,7 +117,7 @@ enum keycodes
 	KEY_7 = 34,
 	KEY_8 = 35,
 	KEY_9 = 36,
-
+	//Keyboard pad numbers
 	KEY_PAD_0 = 37,
 	KEY_PAD_1 = 38,
 	KEY_PAD_2 = 39,
@@ -69,7 +128,7 @@ enum keycodes
 	KEY_PAD_7 = 44,
 	KEY_PAD_8 = 45,
 	KEY_PAD_9 = 46,
-
+	//Keyboard Fkeys
 	KEY_F1 = 47,
 	KEY_F2 = 48,
 	KEY_F3 = 49,
@@ -82,7 +141,7 @@ enum keycodes
 	KEY_F10 = 56,
 	KEY_F11 = 57,
 	KEY_F12 = 58,
-
+	//Keyboard control and other keys
 	KEY_ESCAPE = 59,
 	KEY_TILDE = 60,
 	KEY_MINUS = 61,
@@ -185,8 +244,10 @@ enum keycodes
 
 	KEY_MAX
 };
-//Returns the keycode of the keypressed.
-//keycodes keyPressed();
+//Catches the state of the keyboard in that moment | PARAMETERS: Keyboard state.
+void getKeyboard(ALLEGRO_KEYBOARD_STATE &keyState);
+//Returns true if the specified key was pressed in the state | PARAMETERS: Keyboard state, Keycode.
+bool keyPressed(ALLEGRO_KEYBOARD_STATE &keyState, keycodes key);
 
 //MOUSE
 
