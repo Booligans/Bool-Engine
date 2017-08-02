@@ -8,10 +8,21 @@
 
 //Other libraries needed
 #include <string>
+#include <vector>
+
+//Constants and types needed
+struct tPixelRegion {
+	int width;
+	int height;
+};
 
 //LOADING AND SAVING A SPRITE
-//Loads a sprite | PARAMETERS: Sprite, file directory.
+//Loads a normal sprite | PARAMETERS: Sprite, file directory.
 void loadSprite(ALLEGRO_BITMAP * &image, std::string directory);
+//Loads a sprite animation with same sizes. The first position of the vector will be the whole sprite sheet. | PARAMETERS: Vector of sprites, file directory, number of sprites per line, number of lines.
+void loadSprite(std::vector<ALLEGRO_BITMAP*> &tImage, std::string directory, int width_num, int height_num);
+//Loads a sprite animation with different sizes (needs to have a line separator). The first position of the vector will be the whole sprite sheet. | PARAMETERS: Vector of sprites, file directory, vector with the number of pixel per sprite. NOT DONE
+void loadSprite(std::vector<ALLEGRO_BITMAP*> &tImage, std::string directory);
 //Saves a sprite. Returns true if the image has been saved successfully | PARAMETERS: Sprite, file directory.
 bool saveSprite(ALLEGRO_BITMAP * &image, std::string directory);
 
@@ -38,5 +49,7 @@ void drawSprite(ALLEGRO_BITMAP *image, float posx, float posy, ALLEGRO_COLOR tin
 void showScreen();
 //Destroys the sprite, freeing al the memmory and resources used by it, also lets the pointer to nullptr. PARAMETERS: Sprite.
 void destroySprite(ALLEGRO_BITMAP * &image);
+//Destroys a vector of sprites, freeing all the memmory and resources used by all of them, lets all the pointers to nullptr. PARAMETERS: Vector of sprites.
+void destroySprite(std::vector <ALLEGRO_BITMAP*> &tImage);
 
 #endif
