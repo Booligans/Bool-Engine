@@ -12,14 +12,13 @@
 *                                                \/__/
 *
 *       Main file for the Booligans Engine.
-*/       
+*/
 
 //Framework Libraries
 #include "Collision.h"
 #include "Control.h"
 #include "Graphics.h"
 #include "Sound.h"
-#include "Timer.h"
 
 //Allegro Libraries
 #include <allegro5/allegro_native_dialog.h>
@@ -28,14 +27,15 @@
 
 //Other Libraries
 #include <string>
+#include <vector>
 
 //GENERAL CONSTANTS
 const int FPS = 60;
 
 //FUNCTIONS
-//Initialize the framework: keyboard, image y sound, events system and timer. | PARAMETERS: Screen, Timer, Event queue, number of audios to use and the fps of the timer.
-bool initializeFramework(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER * &timer, ALLEGRO_EVENT_QUEUE * &event_queue, int samples);
+//Initialize the framework: keyboard, image, sound, events system and timer. | PARAMETERS: Screen, Timer, Event queue, number of audios to use and the fps of the timer.
+bool initializeFramework(bool keyboard, bool mouse, bool joystick, bool image, bool audio, int samples = 0);
 //Destroys the framework so that frees all the resources used by it | PARAMETERS: display, event queue.
-void destroyFramework(ALLEGRO_DISPLAY * &display, ALLEGRO_EVENT_QUEUE * &event_queue);
+void destroyFramework(bool keyboard, bool mouse, bool joystick, bool image, bool audio);
 
 #endif
