@@ -1,25 +1,27 @@
 #include "BoolEngine.h"
 
-bool initializeFramework(ALLEGRO_DISPLAY *display, ALLEGRO_TIMER * &timer, ALLEGRO_EVENT_QUEUE * &event_queue, int samples) {
-	bool initialize = true;
+bool initializeFramework(bool keyboard, bool mouse, bool joystick, bool image, bool audio, int samples) {
+	bool initialize = false;
 
-	if (!al_init()) initialize = false;
-	al_install_keyboard();
-	al_install_mouse();
-	al_init_image_addon();
-	al_install_audio();
-	al_init_acodec_addon();
-	al_reserve_samples(samples);
-
-	timer = al_create_timer(1.0 / FPS);
-	event_queue = al_create_event_queue();
-
+	if (al_init()) {
+		initialize = true;
+		if (keyboard) al_install_keyboard();
+		if (mouse) al_install_mouse();
+		if (joystick) al_install_joystick();
+		if (image) al_init_image_addon();
+		if (audio) {
+			al_install_audio();
+			al_init_acodec_addon();
+			al_reserve_samples(samples);
+		}
+	}
 	return initialize;
 }
 
-void destroyFramework(ALLEGRO_DISPLAY * &display, ALLEGRO_EVENT_QUEUE * &event_queue) {
-	al_destroy_display(display);
-	al_destroy_event_queue(event_queue);
-	display = nullptr;
-	event_queue = nullptr;
+void destroyFramework(bool keyboard, bool mouse, bool joystick, bool image, bool audio) {
+	if (keyboard) al_uninstall_keyboard();
+	if (mouse) al_uninstall_mouse();
+	if (joystick) al_uninstall_joystick();
+	if (image) al_shutdown_image_addon();
+	if (audio) al_uninstall_audio();
 }
