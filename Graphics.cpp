@@ -1,15 +1,29 @@
 #include "Graphics.h"
 
-void loadSprite(ALLEGRO_BITMAP * &image, std::string directory) {
-	image = al_load_bitmap(directory.c_str());
+void loadSprite(ALLEGRO_BITMAP * &image, const std::string file) {	
+	ALLEGRO_PATH * path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
+	
+	al_append_path_component(path, "Resources");
+	al_change_directory(al_path_cstr(path, '/'));
+	al_destroy_path(path);								//Until here modified to change the current working directory
+
+	image = al_load_bitmap(file.c_str());
 }
 
 void loadSprite(std::vector<ALLEGRO_BITMAP*> &tImage, std::string directory, int width_num, int height_num) {
+	ALLEGRO_PATH * path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
+
+	al_append_path_component(path, "Resources");
+	al_change_directory(al_path_cstr(path, '/'));
+	al_destroy_path(path);								//Until here modified to change the current working directory
+
 	tImage.push_back(al_load_bitmap(directory.c_str()));
 	int width = al_get_bitmap_width(tImage[0]) / width_num;
 	int height = al_get_bitmap_height(tImage[0]) / height_num;
-	for (int i = 0; i < height_num; i++) {
-		for (int j = 0; j < width_num; j++) {
+	for (int i = 0; i < height_num; i++) 
+	{
+		for (int j = 0; j < width_num; j++) 
+		{
 			tImage.push_back(al_create_sub_bitmap(tImage[0], j * width, i * height, width, height));
 		}
 	}
