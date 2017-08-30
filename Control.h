@@ -3,6 +3,7 @@
 
 //Allegro libraries
 #include <allegro5\allegro.h>
+#include <allegro5/allegro_native_dialog.h>
 
 //Other libraries needed
 #include <string>
@@ -28,7 +29,7 @@ enum eventType
 	EVENT_MOUSE_WARPED = 25,
 
 	EVENT_TIMER = 30, //Event of a timer.
-
+	
 	EVENT_DISPLAY_EXPOSE = 40,
 	EVENT_DISPLAY_RESIZE = 41,
 	EVENT_DISPLAY_CLOSE = 42, //Event clicking on the closing button of the display.
@@ -54,14 +55,26 @@ void initializeEvent(ALLEGRO_DISPLAY *display, ALLEGRO_EVENT_QUEUE * &event_queu
 void waitEvent(ALLEGRO_EVENT_QUEUE * &event_queue, ALLEGRO_EVENT &events);
 //Destroys event queue | PARAMETERS: Event queue.
 void destroyEvent(ALLEGRO_EVENT_QUEUE * &event_queue);
+//Waits for the specified number of seconds | PARAMETERS: seconds.
+void waitSeconds(double seconds);
 
 //DISPLAY
 //Types of screens
-enum ScreenType { standard, fullscreen, fullscreen_window, resizable, noframe };
+enum screenType { standard, fullscreen, fullscreen_window, resizable, noframe };
+//Types of boxes
+enum boxType {
+	MESSAGEBOX_WARN = ALLEGRO_MESSAGEBOX_WARN,
+	MESSAGEBOX_ERROR = ALLEGRO_MESSAGEBOX_ERROR,
+	MESSAGEBOX_OK_CANCEL = ALLEGRO_MESSAGEBOX_OK_CANCEL,
+	MESSAGEBOX_YES_NO = ALLEGRO_MESSAGEBOX_YES_NO,
+	MESSAGEBOX_QUESTION = ALLEGRO_MESSAGEBOX_QUESTION
+};
 //Creates a display. | PARAMETERS: display pointer, height, width, positionX where it appears, positionY where it appears, ScreenTitle and the type of screen (see ScreenType enum for different types).
-void createDisplay(ALLEGRO_DISPLAY * &display, int const& screenHeight, int const& screenWidth, int const& screen_x_position, int const& screen_y_position, std::string screenName, ScreenType const& screenType);
+void createDisplay(ALLEGRO_DISPLAY * &display, int const& screenHeight, int const& screenWidth, int const& screen_x_position, int const& screen_y_position, std::string screenName, screenType const& screenType);
 //Destroys a display. | PARAMETERS: display pointer.
 void destroyDisplay(ALLEGRO_DISPLAY * &display);
+//Creates and shows a message box. | PARAMETERS: display, title, heading, text.
+void createMessageBox(ALLEGRO_DISPLAY *display, std::string title, std::string heading, std::string text, boxType box_type);
 
 //TIMER
 //Creates a timer with a speed of 1/FPS. A timer will generate an event each 1/FPS. | PARAMETERS: Timer pointer, FPS.
@@ -252,3 +265,4 @@ bool keyPressed(ALLEGRO_KEYBOARD_STATE &keyState, keycodes key);
 //MOUSE
 
 #endif
+
