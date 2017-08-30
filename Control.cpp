@@ -16,7 +16,11 @@ void destroyEvent(ALLEGRO_EVENT_QUEUE * &event_queue) {
 	event_queue = nullptr;
 }
 
-void createDisplay(ALLEGRO_DISPLAY * &display, int const& screenHeight, int const& screenWidth, int const& screen_x_position, int const& screen_y_position, std::string screenName, ScreenType const& screenType) {
+void waitSeconds(double seconds) {
+	al_rest(seconds);
+}
+
+void createDisplay(ALLEGRO_DISPLAY * &display, int const& screenHeight, int const& screenWidth, int const& screen_x_position, int const& screen_y_position, std::string screenName, screenType const& screenType) {
 	int screenFlag = standard;
 
 	switch (screenType) {
@@ -36,6 +40,10 @@ void createDisplay(ALLEGRO_DISPLAY * &display, int const& screenHeight, int cons
 void destroyDisplay(ALLEGRO_DISPLAY * &display) {
 	al_destroy_display(display);
 	display = nullptr;
+}
+
+void createMessageBox(ALLEGRO_DISPLAY *display, std::string title, std::string heading, std::string text, boxType box_type) {
+	al_show_native_message_box(display, title.c_str(), heading.c_str(), text.c_str(), NULL, box_type);
 }
 
 void createTimer(ALLEGRO_TIMER * &timer, const double FPS) {
