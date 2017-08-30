@@ -13,11 +13,10 @@ void loadSprite(ALLEGRO_BITMAP * &image, const std::string file) {
 
 void loadSprite(std::vector<ALLEGRO_BITMAP*> &tImage, std::string directory, int width_num, int height_num) {
 	ALLEGRO_PATH * path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
-
 	al_append_path_component(path, "Resources");
 	al_append_path_component(path, "Animations");
 	al_change_directory(al_path_cstr(path, '/'));
-	al_destroy_path(path);								//Until here modified to change the current working directory
+	al_destroy_path(path);
 
 	tImage.push_back(al_load_bitmap(directory.c_str()));
 	int width = al_get_bitmap_width(tImage[0]) / width_num;
@@ -77,11 +76,6 @@ void drawSprite(ALLEGRO_BITMAP *image, float posx, float posy, ALLEGRO_COLOR tin
 	al_draw_tinted_scaled_rotated_bitmap(image, tint, centerx, centery, posx, posy, swidth, sheight, angle, NULL);
 }
 
-void showScreen() {
-	al_flip_display();
-	al_clear_to_color(al_map_rgb(25, 25, 25));
-}
-
 void destroySprite(ALLEGRO_BITMAP * &image) {
 	al_destroy_bitmap(image);
 	image = nullptr;
@@ -93,4 +87,34 @@ void destroySprite(std::vector <ALLEGRO_BITMAP*> &tImage) {
 		tImage[i - 1] = nullptr;
 		tImage.pop_back();
 	}
+}
+
+void loadFont(ALLEGRO_FONT * &font, std::string font_name, int size) {
+	ALLEGRO_PATH * path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
+	al_append_path_component(path, "Resources");
+	al_append_path_component(path, "Font");
+	al_change_directory(al_path_cstr(path, '/'));
+	al_destroy_path(path);
+
+	font = al_load_font(font_name.c_str(), size, NULL);
+}
+
+void drawFont(ALLEGRO_FONT * font, ALLEGRO_COLOR text_color, int x, int y, textType text_type, std::string text) {
+	al_draw_text(font, text_color, x, y, text_type, text.c_str());
+}
+
+void destroyFont(ALLEGRO_FONT * &font) {
+	al_destroy_font(font);
+	font = nullptr;
+}
+
+void showScreen(ALLEGRO_COLOR back_color) {
+	al_flip_display();
+	al_clear_to_color(back_color);
+}
+
+void showScreen(ALLEGRO_COLOR back_color, int x, int y, int width, int height) {
+	al_flip_display();
+	al_set_clipping_rectangle(x, y, width, height);
+	al_clear_to_color(back_color);
 }
