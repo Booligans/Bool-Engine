@@ -25,9 +25,8 @@ const int FPS = 60;
 
 //GENERAL FUNCTIONS
 //Initialize the framework specified. | PARAMETERS: keyboard, mouse, joystick, image, font, audio and the number of audios to use.
-bool initializeFramework(bool keyboard, bool mouse, bool joystick, bool image, bool font, bool audio, int samples = 0);
+bool initializeFramework(bool keyboard, bool mouse, bool joystick, bool image, bool audio, int samples = 0);
 //Destroys the framework specified so that it stops working | PARAMETERS: keyboard, mouse, joystick, image, font, audio and the number of audios to use.
-void destroyFramework(bool keyboard, bool mouse, bool joystick, bool image, bool font, bool audio);
+void destroyFramework(bool keyboard, bool mouse, bool joystick, bool image, bool audio);
 
 #endif
-
