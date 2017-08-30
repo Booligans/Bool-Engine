@@ -20,22 +20,14 @@
 #include "Graphics.h"
 #include "Sound.h"
 
-//Allegro Libraries
-#include <allegro5/allegro_native_dialog.h>
-#include <allegro5/allegro_font.h>
-#include <allegro5/allegro_ttf.h>
-
-//Other Libraries
-#include <string>
-#include <vector>
-
 //GENERAL CONSTANTS
 const int FPS = 60;
 
-//FUNCTIONS
-//Initialize the framework: keyboard, image, sound, events system and timer. | PARAMETERS: Screen, Timer, Event queue, number of audios to use and the fps of the timer.
-bool initializeFramework(bool keyboard, bool mouse, bool joystick, bool image, bool audio, int samples = 0);
-//Destroys the framework so that frees all the resources used by it | PARAMETERS: display, event queue.
-void destroyFramework(bool keyboard, bool mouse, bool joystick, bool image, bool audio);
+//GENERAL FUNCTIONS
+//Initialize the framework specified. | PARAMETERS: keyboard, mouse, joystick, image, font, audio and the number of audios to use.
+bool initializeFramework(bool keyboard, bool mouse, bool joystick, bool image, bool font, bool audio, int samples = 0);
+//Destroys the framework specified so that it stops working | PARAMETERS: keyboard, mouse, joystick, image, font, audio and the number of audios to use.
+void destroyFramework(bool keyboard, bool mouse, bool joystick, bool image, bool font, bool audio);
 
 #endif
+
