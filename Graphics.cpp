@@ -76,6 +76,14 @@ void drawSprite(ALLEGRO_BITMAP *image, float posx, float posy, ALLEGRO_COLOR tin
 	al_draw_tinted_scaled_rotated_bitmap(image, tint, centerx, centery, posx, posy, swidth, sheight, angle, NULL);
 }
 
+float getSpriteWidth(ALLEGRO_BITMAP *image) {
+	return al_get_bitmap_width(image);
+}
+
+float getSpriteHeight(ALLEGRO_BITMAP *image) {
+	return al_get_bitmap_height(image);
+}
+
 void destroySprite(ALLEGRO_BITMAP * &image) {
 	al_destroy_bitmap(image);
 	image = nullptr;

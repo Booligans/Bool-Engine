@@ -45,6 +45,10 @@ void drawSprite(ALLEGRO_BITMAP *image, float posx, float posy, float centerx, fl
 //Loads and draws a tinted, rotated and scaled sprite | PARAMETERS: Sprite, Print position, color, center of rotation, angle, scale of width and scale of height.
 void drawSprite(ALLEGRO_BITMAP *image, float posx, float posy, ALLEGRO_COLOR tint, float centerx, float centery, float angle, float swidth, float sheight);
 
+//Operations with sprites
+float getSpriteWidth(ALLEGRO_BITMAP *image);
+float getSpriteHeight(ALLEGRO_BITMAP *image);
+
 //Destroying sprites
 //Destroys the sprite, freeing al the memmory and resources used by it, also lets the pointer to nullptr | PARAMETERS: Sprite.
 void destroySprite(ALLEGRO_BITMAP * &image);
