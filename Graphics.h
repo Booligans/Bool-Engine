@@ -73,7 +73,7 @@ void destroyFont(ALLEGRO_FONT * &font);
 //Shows in the displays the backbuffer (everything drawed) and then clears the entire backbuffer.
 void showScreen(ALLEGRO_COLOR back_color);
 //Shows in the displays the backbuffer (everything drawed) and then clears the backbuffer of the clipping rectangle.
-void showScreen(ALLEGRO_COLOR back_color, int x, int y, int width, int height);
+void showScreen(ALLEGRO_COLOR back_color, int x, int y, int width, int height, int SCREEN_WIDTH, int SCREEN_HEIGHT);
 
 
 #endif

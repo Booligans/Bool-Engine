@@ -265,4 +265,3 @@ bool keyPressed(ALLEGRO_KEYBOARD_STATE &keyState, keycodes key);
 //MOUSE
 
 #endif
-

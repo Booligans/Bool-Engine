@@ -121,8 +121,9 @@ void showScreen(ALLEGRO_COLOR back_color) {
 	al_clear_to_color(back_color);
 }
 
-void showScreen(ALLEGRO_COLOR back_color, int x, int y, int width, int height) {
+void showScreen(ALLEGRO_COLOR back_color, int x, int y, int width, int height, int SCREEN_WIDTH, int SCREEN_HEIGHT) {
 	al_flip_display();
 	al_set_clipping_rectangle(x, y, width, height);
 	al_clear_to_color(back_color);
+	al_set_clipping_rectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
 }
