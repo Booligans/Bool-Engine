@@ -1,11 +1,23 @@
 #include "Audio.h"
 
 void loadSound(ALLEGRO_SAMPLE * &sound, std::string directory) {
+	ALLEGRO_PATH * path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
+	al_append_path_component(path, "Resources");
+	al_append_path_component(path, "Sounds");
+	al_change_directory(al_path_cstr(path, '/'));
+	al_destroy_path(path);
+
 	sound = al_load_sample(directory.c_str());
 }
 
 void loadSong(ALLEGRO_SAMPLE * &song, std::string directory, ALLEGRO_SAMPLE_INSTANCE * &songInstance, playmodeType playmode) {
 	ALLEGRO_PLAYMODE al_playmode;
+
+	ALLEGRO_PATH * path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
+	al_append_path_component(path, "Resources");
+	al_append_path_component(path, "Music");
+	al_change_directory(al_path_cstr(path, '/'));
+	al_destroy_path(path);
 
 	switch (playmode) {
 	case once: al_playmode = ALLEGRO_PLAYMODE_ONCE; break;

@@ -100,7 +100,7 @@ void destroySprite(std::vector <ALLEGRO_BITMAP*> &tImage) {
 void loadFont(ALLEGRO_FONT * &font, std::string font_name, int size) {
 	ALLEGRO_PATH * path = al_get_standard_path(ALLEGRO_RESOURCES_PATH);
 	al_append_path_component(path, "Resources");
-	al_append_path_component(path, "Font");
+	al_append_path_component(path, "Fonts");
 	al_change_directory(al_path_cstr(path, '/'));
 	al_destroy_path(path);
 
